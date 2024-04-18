@@ -15,7 +15,7 @@
 #' @export
 team_select <- function(team, year) {
   # Load the dataset
-  dataset <- read.csv("data-raw/dataset.csv")
+  dataset <- read.csv("initial_clean.csv")
 
   # Subset the dataset based on the provided team and year
   # NOTE: We need to flag them somehow if they type the team name wrong
@@ -29,7 +29,3 @@ team_select <- function(team, year) {
 
 
 
-
-#' Note we could also create a team_matchup function that could be used
-#' to compare two teams in whatever metric we want. This could be another
-#' custom S3 object we do OR we could just throw two of them into each function.
