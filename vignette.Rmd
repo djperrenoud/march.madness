@@ -1,0 +1,82 @@
+---
+title: "March Madness Project Vignette"
+author: "AJ Haygood Dylan Perrenoud Jonah Feigleson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{March Madness Project Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+This vignette describes how to use the `march.madness` package. This package provides tools for predicting outcomes of NCAA March Madness basketball games based on historical and current season data.
+
+# Installation
+
+You can install the released version of `march.madness` from CRAN with:
+
+``` r
+install.packages("march.madness")
+```
+
+# Data Cleaning
+
+This section outlines the data cleaning procedures implemented in the 'clean_data.R' script, which are designed to refine the data set in alignment with the project's objectives. The process involves removing columns that are not essential for the analysis. Specifically, non-essential data such as conference identifiers, team IDs, and ranking values of various metrics are excluded. For example, while the Kenpom adjusted offensive value is retained, its corresponding ranking values are discarded. This approach enables the direct utilization of actual metric values for more effective comparisons and predictions, rather than relying on their ranked positions.
+
+# Main Functions
+
+## Selection Functions
+
+### Team Selection
+
+#### `team_select(team, year)`
+
+This function creates a custom S3 object for a specific team and year, effectively sub-setting the main data set to focus on data relevant to the specified parameters. The function takes a team name and a year as inputs and returns a subset of data as a custom S3 object of class 'teamdata'.
+
+-   **Parameters**:
+
+    -   `team`: A character string representing the team name.
+    -   `year`: An integer representing the year.
+
+-   **Returns**: A custom S3 object of class 'teamdata' containing the subsetted data.
+
+-   **Example**:
+
+    ``` r
+    selected_team <- team_select("Baylor", 2024)
+    print(selected_team)
+    ```
+
+### Match-up Selection
+
+#### `matchup_select(team1, year1, team2, year2)`
+
+This function facilitates the creation of a custom S3 object representing the data for two specific teams and their respective years, designed for matchup analysis. It processes inputs for two teams and their corresponding years, and returns a detailed comparison setup in a structured format.
+
+-   **Parameters**:
+
+    -   `team1`: A character string representing the name of the first team.
+    -   `year1`: An integer representing the competition year of the first team.
+    -   `team2`: A character string representing the name of the second team.
+    -   `year2`: An integer representing the competition year of the second team.
+
+-   **Returns**: A custom S3 object of class 'teamdata_matchup' which contains a list of the subsetted data for each team and year.
+
+-   **Example**: \`\`\`r selected_matchup \<- matchup_select("Baylor", 2023, "Purdue", 2023) print(selected_matchup)
+
+## Visualization Functions
+
+### Team Visualization
+
+### Match up Visualization
+
+## Match up Function 
