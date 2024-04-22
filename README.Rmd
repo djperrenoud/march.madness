@@ -2,7 +2,6 @@
 title: "march.madness"
 output:
   github_document:
-always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -51,7 +50,7 @@ selected_matchup
 
 To visualize the season summary of a team:
 
-```{r tables}
+```{r tables, eval=FALSE}
 team_table(selected_team)
 
 stat_table(selected_team)

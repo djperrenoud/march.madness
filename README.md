@@ -75,12 +75,6 @@ To visualize the season summary of a team:
 
 ``` r
 team_table(selected_team)
-```
-
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3408390a5e0bae4d9414" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3408390a5e0bae4d9414">{"x":{"filter":"none","vertical":false,"data":[["61"],[2024],["MWC"],["Utah St."],[8],[0],[25],[6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>YEAR<\/th>\n      <th>CONF<\/th>\n      <th>TEAM<\/th>\n      <th>SEED<\/th>\n      <th>ROUND<\/th>\n      <th>W<\/th>\n      <th>L<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,4,5,6,7]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"YEAR","targets":1},{"name":"CONF","targets":2},{"name":"TEAM","targets":3},{"name":"SEED","targets":4},{"name":"ROUND","targets":5},{"name":"W","targets":6},{"name":"L","targets":7}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
-
-``` r
 
 stat_table(selected_team)
 ```
@@ -102,11 +96,11 @@ matchup_prob(selected_matchup)
 #> [1] 1335.59
 #> 
 #> $Probability_of_Team1_Win
-#> [1] "19.85%"
+#> [1] "19.56%"
 #> 
 #> $Probability_of_Team2_Win
-#> [1] "80.15%"
+#> [1] "80.44%"
 #> 
 #> $Prediction
-#> [1] "Team 1"
+#> [1] "Team 2"
 ```
