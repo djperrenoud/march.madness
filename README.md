@@ -1,5 +1,3 @@
-march.madness
-================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -96,10 +94,10 @@ matchup_prob(selected_matchup)
 #> [1] 1335.59
 #> 
 #> $Probability_of_Team1_Win
-#> [1] "19.56%"
+#> [1] "20.04%"
 #> 
 #> $Probability_of_Team2_Win
-#> [1] "80.44%"
+#> [1] "79.96%"
 #> 
 #> $Prediction
 #> [1] "Team 2"
