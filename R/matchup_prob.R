@@ -42,8 +42,8 @@ matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049, sd
     team1_prob <- team1_wins / n_sim
     team2_prob <- team2_wins / n_sim
   } else {
-    team1_prob <- 1 - (team1_wins / n_sim)
-    team2_prob <- 1 - (team2_wins / n_sim)
+    team1_prob <- (team1_wins / n_sim)
+    team2_prob <- (team2_wins / n_sim)
   }
 
   # Weighted coin flip to select a winner
