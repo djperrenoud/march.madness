@@ -1,0 +1,68 @@
+---
+output:
+  github_document:
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# march.madness
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of march.madness is to help you fill out your march madness bracket. This package will help you make informed decisions on who to pick.
+
+## Installation
+
+You can install the development version of march.madness from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("djperrenoud/march.madness")
+```
+
+## Example
+
+To select a single team to view their season stats and use in functions:
+
+```{r team}
+library(march.madness)
+selected_team <- team_select("Utah St.", 2024)
+selected_team
+```
+
+You can also select a matchup of two teams to compare:
+
+```{r matchup}
+selected_matchup <- matchup_select("Utah St.", 2024, "Purdue", 2024)
+selected_matchup
+```
+
+To visualize the season summary of a team:
+
+```{r tables, eval=FALSE}
+team_table(selected_team)
+
+stat_table(selected_team)
+```
+
+To visualize the matchup of two teams:
+
+```{r tables2, eval=FALSE}
+matchup_chart(selected_matchup)
+```
+
+To view the power of each team and the probability of each team winning:
+
+```{r power}
+matchup_prob(selected_matchup)
+```
