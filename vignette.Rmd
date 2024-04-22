@@ -79,4 +79,4 @@ This function facilitates the creation of a custom S3 object representing the da
 
 ### Match up Visualization
 
-## Match up Function 
+## Match up Function
