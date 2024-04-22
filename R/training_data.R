@@ -1,5 +1,5 @@
 # Training data to find which stats are important for probability of winning
-# Used the 2021 tournament
+# Used the 2021 tournament results
 # This is specifically for matchup_function.R
 example_results <- read.csv("2021-Results.csv")
 dataset_2021 <- subset(dataset, YEAR == 2021)
