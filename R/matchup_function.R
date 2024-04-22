@@ -2,19 +2,12 @@ example_results <- read.csv("2021-Results.csv")
 
 dataset_2021 <- subset(dataset, YEAR == 2021)
 
-# Merge the tournament results with team information for Team1
+# Merge the tournament results with team information for Team1 and Team2
 matchup_stats <- merge(example_results, dataset_2021, by.x = "Team1", by.y = "TEAM", suffixes = c("", ".winner"))
-
-# Merge the tournament results with team information for Team2
 matchup_stats <- merge(matchup_stats, dataset_2021, by.x = "Team2", by.y = "TEAM", suffixes = c("", ".loser"))
 
-
-# Remove a column by name
+# Remove useless columns
 matchup_stats <- subset(matchup_stats, select = -c(Year, YEAR, YEAR.loser, Round, ROUND, ROUND.loser))
-
-# Print the merged data
-print(matchup_stats)
-
 
 
 
@@ -50,13 +43,8 @@ result <- data.frame(
   Count_Greater_Than_0 = counts_greater_than_0
 )
 
-print(result)
-
-
-coefficients <- c(0.716, 0.466, 0.7, 6.616, 0.716, 0.716, 0.583, 0, 0.533, 0.55, 0.566, 0.583, 0.516, 0.483, 0.483, 0.516, 0.566, 0.566, 0.433, 0.433, 0.583, 0.466, 0.566, 0.483, 0.566, 0.466, 0.516, 0.416, 0.483, 0.45, 0.583, 0.4, 0.366, 0.633, 0.483, 0.533, 0.516, 0.4, 0.683, 0.55, 0.45, 0.65, 0.533)
 
 matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049, sd_diff = 103.68) {
-
   coefficients <- c(0.716, 0.466, 0.7, 6.616, 0.716, 0.716, 0.583, 0, 0.533, 0.55, 0.566, 0.583, 0.516, 0.483, 0.483, 0.516, 0.566, 0.566, 0.433, 0.433, 0.583, 0.466, 0.566, 0.483, 0.566, 0.466, 0.516, 0.416, 0.483, 0.45, 0.583, 0.4, 0.366, 0.633, 0.483, 0.533, 0.516, 0.4, 0.683, 0.55, 0.45, 0.65, 0.533)
 
   power1 <- colSums(teamdata_matchup$list_data$team1_year1[, -c(1:5)] * coefficients)
@@ -70,8 +58,7 @@ matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049, sd
   if (power1 - power2 > 0) {
     team1_wins <- sum(simulated_diffs >= (power1 - power2))
     team2_wins <- sum(simulated_diffs < (power1 - power2))
-  }
-  else {
+  } else {
     team1_wins <- sum(simulated_diffs > (power2 - power1))
     team2_wins <- sum(simulated_diffs <= (power2 - power1))
   }
@@ -81,13 +68,3 @@ matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049, sd
 
   return(list(Team1_Power = power1, Team2_Power = power2, Team1_Probability = team1_prob, Team2_Probability = team2_prob))
 }
-
-
-
-
-
-
-
-
-
-
