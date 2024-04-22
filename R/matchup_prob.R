@@ -7,6 +7,12 @@
 #' @param teamdata_matchup A custom S3 object of class 'teamdata_matchup'
 #' containing the subsetted data of two teams in the selected years.
 #'
+#' @param n_sim The number of simulations to run. Default is 10000.
+#'
+#' @param mean_diff The mean of the normal distribution. Default is 57.049.
+#'
+#' @param sd_diff The standard deviation of the normal distribution. Default is 103.68.
+#'
 #' @return The "power" index of each team as well as the probability of each
 #' team winning. Also a weighted coin flip if you want to select a winner from
 #' the probabilities.
