@@ -4,6 +4,8 @@
 #' uses this and a normal distribution to simulate
 #' the probability of each team winning
 #'
+#' @importFrom "stats" "rnorm" "runif" "setNames"
+#'
 #' @param teamdata_matchup A custom S3 object of class 'teamdata_matchup'
 #' containing the subsetted data of two teams in the selected years.
 #'

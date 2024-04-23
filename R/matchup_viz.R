@@ -5,6 +5,8 @@
 #' Rate) to give insights on which team is better. The output of the function is
 #' a bar chart showing side by side percentages for each team's metrics.
 #'
+#' @importFrom "ggplot2" "ggplot" "geom_bar" "aes" "theme_minimal" "theme" "labs" "element_text"
+#'
 #' @param selected_team1 a team_select object specifying the first team and of
 #' interest.
 #' @param selected_team2 a team_select object specifying the second team and of

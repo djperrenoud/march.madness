@@ -3,6 +3,8 @@
 #' Creates a custom S3 object representing a subset of data
 #' for a specific team and year.
 #'
+#' @importFrom "utils" "read.csv" "menu"
+#'
 #' @param team A character string representing the team name.
 #'
 #' @param year An integer representing the year.

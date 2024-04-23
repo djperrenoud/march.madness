@@ -29,6 +29,8 @@ team_table <- function(selected_team) {
 #'for a team. These include efficiency field goals, free throw rate,
 #'offensive rebounds, and turnover rate.
 #'
+#' @importFrom "DT" "datatable"
+#'
 #' @param selected_team a team_select object representing a dataframe for a team
 #' in a given year.
 #'
