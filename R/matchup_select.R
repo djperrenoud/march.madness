@@ -21,7 +21,7 @@
 #' @export
 matchup_select <- function(team1, year1, team2, year2) {
   # Load the dataset
-  dataset <- read.csv("initial_clean.csv")
+  dataset <- read.csv("data/initial_clean.csv")
 
   # Process each team and year using a nested function
   process_team_year <- function(team, year) {

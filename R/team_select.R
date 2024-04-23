@@ -15,7 +15,7 @@
 #' @export
 team_select <- function(team, year) {
   # Load the dataset
-  dataset <- read.csv("initial_clean.csv")
+  dataset <- read.csv("data/initial_clean.csv")
 
   # Format the team name input
   formatted_team <- format_team_name(team)

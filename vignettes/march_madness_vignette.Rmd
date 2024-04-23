@@ -51,10 +51,10 @@ This function creates a custom S3 object for a specific team and year, effective
 
 -   **Example**:
 
-    ``` r
-    selected_team <- team_select("Baylor", 2024)
-    print(selected_team)
-    ```
+``` r
+selected_team <- team_select("Baylor", 2024)
+print(selected_team)
+```
 
 ### Match-up Selection
 
