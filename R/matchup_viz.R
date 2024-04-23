@@ -7,21 +7,17 @@
 #'
 #' @importFrom "ggplot2" "ggplot" "geom_bar" "aes" "theme_minimal" "theme" "labs" "element_text"
 #'
-#' @param selected_team1 a team_select object specifying the first team and of
-#' interest.
-#' @param selected_team2 a team_select object specifying the second team and of
-#' interest.
+#' @param teamdata_matchup A list of two dataframes, each containing the statistics for that team and year
 #'
 #' @return The bar chart described above.
 #'
-#' @examples matchup_chart(team_select("Baylor", 2023),
-#' team_select("Purdue", 2023))
+#' @examples matchup_chart(matchup_select("Purdue", 2024, "Utah St.", 2024))
 #'
 #' @export
-matchup_chart <- function(selected_team1, selected_team2) {
+matchup_chart <- function(teamdata_matchup) {
 
-  team1_statistics <- selected_team1[, c(16, 18, 20, 22)]
-  team2_statistics <- selected_team2[, c(16, 18, 20, 22)]
+  team1_statistics <- teamdata_matchup$list_data$team1_year1[, c(16, 18, 20, 22)]
+  team2_statistics <- teamdata_matchup$list_data$team2_year2[, c(16, 18, 20, 22)]
 
   #Creates a dataframe storing the EFG, FTR, TOV, and OREB statistics, for the
   #two teams picked with the team_select function.
@@ -40,4 +36,3 @@ matchup_chart <- function(selected_team1, selected_team2) {
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 }
-
