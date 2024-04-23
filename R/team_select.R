@@ -112,6 +112,5 @@ team_select <- function(team, year) {
     formatted_team & dataset$YEAR == year, ]
 
   # Return the subsetted data
-  # Also this won't be as messy bc we clean our data to only fit what we need
-  return(subset_data)
+  return(new_teamdata(subset_data))
 }

@@ -19,7 +19,7 @@
 #'
 #' @export
 team_table <- function(selected_team) {
-  t_table <- datatable(selected_team[, c(1:5, 13:14)])
+  t_table <- datatable(selected_team$data_frame[, c(1:5, 13:14)])
   return(t_table)
 }
 
@@ -38,6 +38,6 @@ team_table <- function(selected_team) {
 #'
 #' @export
 stat_table <- function(selected_team) {
-  s_table <- datatable(selected_team[, c(1, 3, 4, 16, 18, 20, 22)])
+  s_table <- datatable(selected_team$data_frame[, c(1, 3, 4, 16, 18, 20, 22)])
   print(s_table)
 }
