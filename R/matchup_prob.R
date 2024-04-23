@@ -52,20 +52,35 @@ matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049, sd
     team2_prob <- (team2_wins / n_sim)
   }
 
+  #Extract team names and years
+  team1_name <- teamdata_matchup$list_data$team1_year1$TEAM[1]
+  team1_year <- teamdata_matchup$list_data$team1_year1$YEAR[1]
+  team2_name <- teamdata_matchup$list_data$team2_year2$TEAM[1]
+  team2_year <- teamdata_matchup$list_data$team2_year2$YEAR[1]
+
   # Weighted coin flip to select a winner
   if (runif(1) < team1_prob) {
-    prediction <- "Team 1"
+    prediction <- c(team1_name, team1_year)
   } else {
-    prediction <- "Team 2"
+    prediction <- c(team2_name, team2_year)
   }
 
   # Format the results
-  formatted_results <- list(
-    Team1_Power_Index = round(power1, 2),
-    Team2_Power_Index = round(power2, 2),
-    Probability_of_Team1_Win = paste0(round(team1_prob * 100, 2), "%"),
-    Probability_of_Team2_Win = paste0(round(team2_prob * 100, 2), "%"),
-    Prediction = prediction
+  formatted_results <- setNames(
+    list(
+      round(power1, 2),
+      round(power2, 2),
+      paste0(round(team1_prob * 100, 2), "%"),
+      paste0(round(team2_prob * 100, 2), "%"),
+      prediction
+    ),
+    c(
+      paste(team1_name, team1_year, "Power Index"),
+      paste(team2_name, team2_year, "Power Index"),
+      paste("Probability of", team1_name, team1_year, "Win"),
+      paste("Probability of", team2_name, team2_year, "Win"),
+      "Prediction"
+    )
   )
 
   return(formatted_results)
