@@ -23,8 +23,3 @@ list of the subsetted data.
 Creates a custom S3 object representing a list of data
 for two specific teams and years.
 }
-\examples{
-selected_matchup <- matchup_select("Baylor", 2023, "Purdue", 2023)
-print(selected_matchup)
-
-}

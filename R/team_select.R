@@ -11,8 +11,6 @@
 
 #' @return A custom S3 object of class 'teamdata' containing the subsetted data.
 #'
-#' @examples selected_team <- team_select("Baylor", 2024)
-#' print(selected_team)
 #'
 #' @export
 team_select <- function(team, year) {

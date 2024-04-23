@@ -15,8 +15,6 @@
 #' @return a data table with team name, year, conference, seed, round, wins and
 #' losses.
 #'
-#' @examples team_table(team_select("Baylor", 2023))
-#'
 #' @export
 team_table <- function(selected_team) {
   t_table <- datatable(selected_team$data_frame[, c(1:5, 13:14)])
@@ -35,8 +33,6 @@ team_table <- function(selected_team) {
 #' in a given year.
 #'
 #' @return a data table with the statistics specified in the description.
-#'
-#' @examples stat_table(team_select("Baylor", 2023))
 #'
 #' @export
 stat_table <- function(selected_team) {

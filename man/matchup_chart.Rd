@@ -4,14 +4,10 @@
 \alias{matchup_chart}
 \title{Matchup Vis}
 \usage{
-matchup_chart(selected_team1, selected_team2)
+matchup_chart(teamdata_matchup)
 }
 \arguments{
-\item{selected_team1}{a team_select object specifying the first team and of
-interest.}
-
-\item{selected_team2}{a team_select object specifying the second team and of
-interest.}
+\item{teamdata_matchup}{A list of two dataframes, each containing the statistics for that team and year}
 }
 \value{
 The bar chart described above.
@@ -21,9 +17,4 @@ This function takes two teams and compares four important statistics
 (Efficiency Field Goals, Free Throw Rate, Offensive Rebounds, and Turnover
 Rate) to give insights on which team is better. The output of the function is
 a bar chart showing side by side percentages for each team's metrics.
-}
-\examples{
-matchup_chart(team_select("Baylor", 2023),
-team_select("Purdue", 2023))
-
 }

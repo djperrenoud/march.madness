@@ -18,7 +18,3 @@ This function creates a simple table showing important success indicators
 for a team. These include efficiency field goals, free throw rate,
 offensive rebounds, and turnover rate.
 }
-\examples{
-stat_table(team_select("Baylor", 2023))
-
-}

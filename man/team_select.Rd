@@ -18,8 +18,3 @@ A custom S3 object of class 'teamdata' containing the subsetted data.
 Creates a custom S3 object representing a subset of data
 for a specific team and year.
 }
-\examples{
-selected_team <- team_select("Baylor", 2024)
-print(selected_team)
-
-}

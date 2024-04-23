@@ -15,9 +15,6 @@
 #' @return A custom S3 object of class 'teamdata_matchup' containing a
 #' list of the subsetted data.
 #'
-#' @examples selected_matchup <- matchup_select("Baylor", 2023, "Purdue", 2023)
-#' print(selected_matchup)
-#'
 #' @export
 matchup_select <- function(team1, year1, team2, year2) {
   # Load the dataset

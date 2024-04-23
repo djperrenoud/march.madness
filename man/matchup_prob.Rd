@@ -37,8 +37,3 @@ Gives two selectd teams a "power" rating based on their statistics and
 uses this and a normal distribution to simulate
 the probability of each team winning
 }
-\examples{
-selected_matchup <- matchup_select("Purdue", 2024, "Utah St.", 2024)
-matchup_prob(selected_matchup)
-
-}

@@ -25,7 +25,3 @@ This function creates a simple table showing basic information about the team.
 This includes team name, year, conference, seed, the round they made it to,
 wins and losses.
 }
-\examples{
-team_table(team_select("Baylor", 2023))
-
-}

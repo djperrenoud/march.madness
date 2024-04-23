@@ -19,9 +19,6 @@
 #' team winning. Also a weighted coin flip if you want to select a winner from
 #' the probabilities.
 #'
-#' @examples selected_matchup <- matchup_select("Purdue", 2024, "Utah St.", 2024)
-#' matchup_prob(selected_matchup)
-#'
 #' @export
 matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049, sd_diff = 103.68) {
   # Coefficients found from training_data.R

@@ -11,8 +11,6 @@
 #'
 #' @return The bar chart described above.
 #'
-#' @examples matchup_chart(matchup_select("Purdue", 2024, "Utah St.", 2024))
-#'
 #' @export
 matchup_chart <- function(teamdata_matchup) {
 
@@ -24,8 +22,8 @@ matchup_chart <- function(teamdata_matchup) {
   combined_stats <- rbind(data.frame(Team = "Team1", team1_statistics),
                           data.frame(Team = "Team2", team2_statistics))
 
-  combined_stats_long <- tidyr::gather(combined_stats, Statistic, Value, EFG., FTR,
-                                       TOV., OREB.)
+  combined_stats_long <- tidyr::gather(combined_stats, "Statistic", 'Value', 'EFG.', 'FTR',
+                                       'TOV.', 'OREB.')
   #Creates a side-by-side bar chart with blue and red columns comparing
   #statistics of interest for two teams.
   ggplot(combined_stats_long, aes(x = Statistic, y = Value, fill = Team)) +
