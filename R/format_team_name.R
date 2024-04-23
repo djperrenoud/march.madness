@@ -26,16 +26,36 @@ format_team_name <- function(team) {
       return("LIU Brooklyn")
     } else if (words[1] == "ut" && words[2] == "arlington") {
       return("UT Arlington")
-    } else if (words[1] == "mount" && (words[2] == "saint" || words[2] == 'st' || words[2] == 'st.') && (words[3] == "marys" || words[3] == "mary's")) {
-      return("Mount St. Mary's")
+    } else if (words[1] == "unc" && words[2] == "asheville") {
+      return("UNC Asheville")
+    } else if (words[1] == "mcneese") {
+      return("McNeese St.")
     } else if (words[1] == "uc" && words[2] == "davis") {
       return("UC Davis")
     } else if (words[1] == "uc" && words[2] == "irvine") {
       return("UC Irvine")
     } else if (words[1] == "uc" && words[2] == "santa" && words[3] == "barbara") {
       return("UC Santa Barbara")
-    } else if (words[1] == "miami" && (words[2] == fl || words[2] == florida)) {
+    } else if (words[1] == "miami" && (words[2] == "fl" || words[2] == "florida")) {
       return("Miami FL")
+    }
+  }
+
+  # Handle 'Saint' Schools
+  # First, handle specific cases involving 'Saint', 'St', or 'St.'
+  if (length(words) >= 2) {
+    if (words[1] == "mount" && (words[2] == "saint" || words[2] == "st" || words[2] == "st.") && (words[3] == "marys" || words[3] == "mary's")) {
+      return("Mount St. Mary's")
+    } else if (words[1] == "saint" || words[1] == "st" || words[1] == "st.") {
+      if (words[2] == "joseph's" || words[2] == "josephs") {
+        return("Saint Joseph's")
+      } else if (words[2] == "louis") {
+        return("Saint Louis")
+      } else if (words[2] == "marys" || words[2] == "mary's") {
+        return("Saint Mary's")
+      } else if (words[2] == "peters" || words[2] == "peter's") {
+        return("Saint Peter's")
+      }
     }
   }
 
