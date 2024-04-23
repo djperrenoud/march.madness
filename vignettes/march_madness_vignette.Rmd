@@ -1,6 +1,6 @@
 ---
 title: "March Madness Project Vignette"
-author: "AJ Haygood Dylan Perrenoud Jonah Feigleson"
+author: "AJ Haygood, Dylan Perrenoud, Jonah Feigleson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -40,6 +40,8 @@ This section outlines the data cleaning procedures implemented in the 'clean_dat
 
 #### `format_team_name(team)`
 
+The `format_team_name` function is designed to correct and standardize team names input by users, ensuring consistency with the naming conventions used in the dataset. It manages variations and common typographical errors, and it adjusts specific formatting for known team names based on predefined rules.
+
 ### Team Selection
 
 #### `team_select(team, year)`
@@ -75,7 +77,11 @@ This function facilitates the creation of a custom S3 object representing the da
 
 -   **Returns**: A custom S3 object of class 'teamdata_matchup' which contains a list of the subsetted data for each team and year.
 
--   **Example**: \`\`\`r selected_matchup \<- matchup_select("Baylor", 2023, "Purdue", 2023) print(selected_matchup)
+-   **Example**: 
+```r
+selected_matchup <- matchup_select("Baylor", 2023, "Purdue", 2023)
+print(selected_matchup)
+```
 
 ## Visualization Functions
 
