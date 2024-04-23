@@ -47,6 +47,8 @@ format_team_name <- function(team) {
       return("UTEP")
     } else if (words[1] == "utsa") {
       return("UTSA")
+    } else if (words[1] == "umbc") {
+      return("UMBC")
     }
   }
 

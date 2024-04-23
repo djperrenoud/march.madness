@@ -36,6 +36,10 @@ This section outlines the data cleaning procedures implemented in the 'clean_dat
 
 ## Selection Functions
 
+### Team Name Formatting
+
+#### `format_team_name(team)`
+
 ### Team Selection
 
 #### `team_select(team, year)`
@@ -80,3 +84,5 @@ This function facilitates the creation of a custom S3 object representing the da
 ### Match up Visualization
 
 ## Match up Function
+
+#### `matchup_prob(teamdata_matchup)`
