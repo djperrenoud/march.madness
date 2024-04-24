@@ -42,6 +42,76 @@ This section outlines the data cleaning procedures implemented in the 'clean_dat
 
 The `format_team_name` function is designed to correct and standardize team names input by users, ensuring consistency with the naming conventions used in the dataset. It manages variations and common typographical errors, and it adjusts specific formatting for known team names based on predefined rules.
 
+-   **Details**:
+
+    -   Takes user input an lower cases every letter from the start
+
+    -   First checks if the input is part of the "special cases" to insure correct capitalization:
+
+        -   Loyola MD
+        -   LIU Brooklyn
+        -   UT Arlington
+        -   UNC Asheville
+        -   McNeese St.
+        -   UC Davis
+        -   UC Irvine
+        -   UC Santa Barbara
+
+    -   Checks if the input is apart of the "saint cases" to output "Saint" correctly:
+
+        -   Mount St. Mary's is the exception
+        -   Saint Louis
+        -   Saint Joseph's
+        -   Saint Mary's
+        -   Saint Peter's
+    
+    -   Checks if the school is an A&M or A&T school:
+        -   North Carolina A&T
+        -   Praire View A&M
+        -   Texas A&M
+        -   Texas A&M Corpus Christi
+
+    -   Checks if the input is apart of the 4 letter all caps cases:
+
+        -   UNLV
+        -   UTEP
+        -   UTSA
+        -   UMBC
+
+    -   Checks if the input is the "Miami case"
+
+        -   Since there are two universities named "Miami", if a user inputs "Miami" it automatically will switch the input to "Miami FL" due to the fact that Miami Ohio is not included in the dataset. The user will receive a warning letting them know that "Miami" was coerced to "Miami FL".
+
+    -   Checks if the input is apart of the 3 letter all caps cases
+
+    -   After checking these cases, general capitalization rules will apply, capitalizing the first letter in each word
+
+    -   The function also allows for the user to input "St." as "state" or "st" to allow some error from the user.
+
+-   **Parameters**:
+
+    -   `team`: A character string representing the team name as inputted by the user.
+
+-   **Returns**:
+
+    -   A character string with the properly formatted team name to match the dataset's expected format.
+
+-   **Example**:
+
+``` r
+# Example of handling a common abbreviation
+formatted_team <- format_team_name("utah st")
+print(formatted_team) # Outputs "Utah St."
+
+# Handling a university name with special abbreviations
+formatted_team <- format_team_name("uc irvine")
+print(formatted_team) # Outputs "UC Irvine"
+
+# Correcting and standardizing 'Saint' school names
+formatted_team <- format_team_name("st joseph's")
+print(formatted_team) # Outputs "Saint Joseph's"
+```
+
 ### Team Selection
 
 #### `team_select(team, year)`
@@ -53,7 +123,9 @@ This function creates a custom S3 object for a specific team and year, effective
     -   `team`: A character string representing the team name.
     -   `year`: An integer representing the year.
 
--   **Returns**: A custom S3 object of class 'teamdata' containing the subsetted data.
+-   **Returns**:
+
+    -   A custom S3 object of class 'teamdata' containing the subsetted data.
 
 -   **Example**:
 
@@ -77,8 +149,9 @@ This function facilitates the creation of a custom S3 object representing the da
 
 -   **Returns**: A custom S3 object of class 'teamdata_matchup' which contains a list of the subsetted data for each team and year.
 
--   **Example**: 
-```r
+-   **Example**:
+
+``` r
 selected_matchup <- matchup_select("Baylor", 2023, "Purdue", 2023)
 print(selected_matchup)
 ```
@@ -87,8 +160,59 @@ print(selected_matchup)
 
 ### Team Visualization
 
+DESCRIPTION HERE
+
+-   **Parameters**:
+
+    - 
+
+-   **Returns**:
+
+    -   
+
+-   **Example**:
+
+``` r
+
+```
+
 ### Match up Visualization
+
+DESCRIPTION HERE
+
+-   **Parameters**:
+
+    - 
+
+-   **Returns**:
+
+    -   
+
+-   **Example**:
+
+``` r
+
+```
 
 ## Match up Function
 
 #### `matchup_prob(teamdata_matchup)`
+
+Gives two selected teams a "power" rating based on their statistics and uses this and a normal distribution to simulate the probability of each team winning.
+
+-   **Parameters**:
+
+    -   `teamdata_matchup`
+
+-   **Returns**:
+
+    -   Power Index's for teams 1 and 2
+    -   Probability of winning for teams 1 and 2
+    -   Final prediction based off of weighted coinflip
+
+-   **Example**:
+
+``` r
+teamdata_matchup <- matchup_select("Purdue", 2024, "Utah St.", 2024)
+matchup_prob(teamdata_matchup)
+```

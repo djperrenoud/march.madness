@@ -59,6 +59,20 @@ format_team_name <- function(team) {
     }
   }
 
+  # Handle Specific A&M and A&T Schools
+  if (length(words) >= 2) {
+    if (words[1] == "north" && words[2] == "carolina" && words[3] == "a&t") {
+      return("North Carolina A&T")
+    } else if (words[1] == "praire" && words[2] == "view" && words[3] == "a&m") {
+      return("Praire View A&M")
+      } else if (length(words) >= 4 && words[1] == "texas" && words[2] == "a&m" && words[3] == "corpus" && words[4] == "christi") {
+      return("Texas A&M Corpus Christi")
+      } else if (words[1] == "texas" && words[2] == "a&m") {
+      return("Texas A&M")
+      }
+    }
+
+
   # Handle Specific Four Letter Abbreviations
   if (nchar(words[1]) == 4 && length(words) == 1){
     if (words[1] == "unlv"){
@@ -91,4 +105,5 @@ format_team_name <- function(team) {
                                 sub("st$", "St.", words))))
 
   return(paste(words, collapse = " "))
+
 }
