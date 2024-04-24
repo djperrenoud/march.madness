@@ -64,8 +64,9 @@ The `format_team_name` function is designed to correct and standardize team name
         -   Saint Joseph's
         -   Saint Mary's
         -   Saint Peter's
-    
+
     -   Checks if the school is an A&M or A&T school:
+
         -   North Carolina A&T
         -   Praire View A&M
         -   Texas A&M
@@ -158,40 +159,58 @@ print(selected_matchup)
 
 ## Visualization Functions
 
-### Team Visualization
+### Team Table
 
-DESCRIPTION HERE
+#### `team_table(selected_team)`
+
+This function creates a simple table showing basic information about the team. This includes team name, year, conference, seed, the round they made it to, wins and losses.
 
 -   **Parameters**:
 
-    - 
+    -   `selected_team`: A custom S3 object of class 'teamdata' containing subsetted data for the specified team.
 
--   **Returns**:
-
-    -   
+-   **Returns**: A data table with team name, year, conference, seed, round, wins and losses for the specified team.
 
 -   **Example**:
 
 ``` r
+team_table(team_select("Baylor", 2024))
+```
 
+### Stat Table
+
+#### `stat_table(selected_team)`
+
+This function creates a simple table showing important success indicators for a team. These include efficiency field goals, free throw rate, offensive rebounds, and turnover rate.
+
+-   **Parameters**:
+
+    -   `selected_team`: A custom S3 object of class 'teamdata' containing subsetted data for the specified team.
+
+-   **Returns**: A data table with the statistics specified in the description.
+
+-   **Example**:
+
+``` r
+stat_table(team_select("Baylor", 2024))
 ```
 
 ### Match up Visualization
 
-DESCRIPTION HERE
+#### `matchup_chart(teamdata_matchup)`
+
+This function takes two teams and compares four important statistics (Efficiency Field Goals, Free Throw Rate, Offensive Rebounds, and Turnover Rate) to give insights on which team is better. The output of the function is a bar chart showing side by side percentages for each team's metrics.
 
 -   **Parameters**:
 
-    - 
+    \-`teamdata_matchup`: A custom S3 object of class 'teamdata_matchup' which contains a list of the subsetted data for each team and year.
 
--   **Returns**:
-
-    -   
+-   **Returns**: A side-by-side bar chart showing a comparison of the four important statistics described above.
 
 -   **Example**:
 
 ``` r
-
+matchup_table(matchup_select("Baylor", 2024, "Purdue", 2024))
 ```
 
 ## Match up Function
