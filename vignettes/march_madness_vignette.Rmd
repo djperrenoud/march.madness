@@ -2,7 +2,7 @@
 title: "March Madness Project Vignette"
 author: "AJ Haygood, Dylan Perrenoud, Jonah Feigleson"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{March Madness Project Vignette}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,6 +15,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+# Github URL
+
+https://github.com/djperrenoud/march.madness
 
 # Introduction
 
