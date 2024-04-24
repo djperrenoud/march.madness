@@ -61,7 +61,7 @@ format_team_name <- function(team) {
 
   # Handle Specific A&M and A&T Schools
   if (length(words) >= 2) {
-    if (words[1] == "north" && words[2] == "carolina" && words[3] == "a&t") {
+    if (length(words) >= 3 && words[1] == "north" && words[2] == "carolina" && words[3] == "a&t") {
       return("North Carolina A&T")
     } else if (words[1] == "praire" && words[2] == "view" && words[3] == "a&m") {
       return("Praire View A&M")
