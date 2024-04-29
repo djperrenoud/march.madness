@@ -22,11 +22,41 @@ https://github.com/djperrenoud/march.madness
 
 # Introduction
 
-This vignette describes how to use the `march.madness` package. This package provides tools for predicting outcomes of NCAA March Madness basketball games based on historical and current season data.
+This vignette describes how to use the `march.madness` package. This package 
+provides tools for predicting outcomes of NCAA March Madness basketball games 
+based on historical and current season data.The functions in this package can 
+be used to query the KenPom database for relevant basketball statistics for 
+college men's basketball teams from the years 2008-2024. Additionally, they 
+can be used to output  These tools are useful for a number of reasons. 
+informative tables and graphs for individual teams as well as matchups. The 
+matchup probability function predicts the probability of winning for two teams 
+if they played each other. 
+
+These functions are useful for a couple of situations. First, they allow users 
+to make data-informed decisions when predicting outcomes of March Madness 
+tournament games. This year, 17.3 million people created March Madness brackets 
+for men's college basketball on ESPN's Tournament Challenge platform. Having 
+tools available to predict win probabilities and compare important stats, like 
+those in this package, would help people with little background knowledge about 
+basketball stay competitive in bracket challenges. Second, it gives basketball 
+fans a tool to analyze their favorite team's winning ability. The functions in 
+this package can be used to compare the same basketball team from different 
+years. This allows users to assess the progression of their teams year to year.
+
+The multi-year comparison capabilities of our package set it apart from other
+tools for March Madness bracket building. Additionally, our matchup probability 
+function is robust. After testing it on multiple 2024 March Madness brackets, it
+predicted at least one of the teams in the national championship correctly, and 
+predicted 9 out of 13 upsets. 
+
+This vignette explains the importance of each function in our package, and how 
+they work together to help users prepare March Madness brackets and make 
+user-friendly comparisons of college basketball teams. 
+
 
 # Installation
 
-You can install the released version of `march.madness` from CRAN with:
+You can install the released version of `march.madness` with:
 
 ``` r
 install.packages("march.madness")
@@ -34,7 +64,15 @@ install.packages("march.madness")
 
 # Data Cleaning
 
-This section outlines the data cleaning procedures implemented in the 'clean_data.R' script, which are designed to refine the data set in alignment with the project's objectives. The process involves removing columns that are not essential for the analysis. Specifically, non-essential data such as conference identifiers, team IDs, and ranking values of various metrics are excluded. For example, while the Kenpom adjusted offensive value is retained, its corresponding ranking values are discarded. This approach enables the direct utilization of actual metric values for more effective comparisons and predictions, rather than relying on their ranked positions.
+This section outlines the data cleaning procedures implemented in the 
+'clean_data.R' script, which are designed to refine the data set in alignment 
+with the project's objectives. The process involves removing columns that are 
+not essential for the analysis. Specifically, non-essential data such as 
+conference identifiers, team IDs, and ranking values of various metrics are 
+excluded. For example, while the Kenpom adjusted offensive value is retained, 
+its corresponding ranking values are discarded. This approach enables the direct
+utilization of actual metric values for more effective comparisons and 
+predictions, rather than relying on their ranked positions.
 
 # Main Functions
 
@@ -44,13 +82,26 @@ This section outlines the data cleaning procedures implemented in the 'clean_dat
 
 #### `format_team_name(team)`
 
-The `format_team_name` function is designed to correct and standardize team names input by users, ensuring consistency with the naming conventions used in the dataset. It manages variations and common typographical errors, and it adjusts specific formatting for known team names based on predefined rules.
+This formatting function improves user experience by accounting for alternate 
+spellings for team names. For example, if a user were to use the input 
+"Utah St." in the team_select function, we understand which team they would like
+information on. However, if the KenPom dataset has the team listed as Utah 
+State, the team_select function would throw an error. This function standardizes
+the user's inputs with the names used in the dataset. It runs the user's team 
+name through various cases listed below, and then coerces the inputted name to 
+its correct format. Additionally, if a user forgot to include common 
+typographical elements like capitalization and punctuation, the function 
+accounts for these as well. This function is necessary for a smooth user 
+experience, and is called in the team_select and matchup_select functions to 
+minimize easily avoided errors. To understand the specifics of how the function 
+operates, refer to the details section below.
 
 -   **Details**:
 
     -   Takes user input an lower cases every letter from the start
 
-    -   First checks if the input is part of the "special cases" to insure correct capitalization:
+    -   First checks if the input is part of the "special cases" to insure 
+    correct capitalization:
 
         -   Loyola MD
         -   LIU Brooklyn
@@ -61,7 +112,8 @@ The `format_team_name` function is designed to correct and standardize team name
         -   UC Irvine
         -   UC Santa Barbara
 
-    -   Checks if the input is apart of the "saint cases" to output "Saint" correctly:
+    -   Checks if the input is apart of the "saint cases" to output "Saint" 
+    correctly:
 
         -   Mount St. Mary's is the exception
         -   Saint Louis
@@ -85,21 +137,19 @@ The `format_team_name` function is designed to correct and standardize team name
 
     -   Checks if the input is the "Miami case"
 
-        -   Since there are two universities named "Miami", if a user inputs "Miami" it automatically will switch the input to "Miami FL" due to the fact that Miami Ohio is not included in the dataset. The user will receive a warning letting them know that "Miami" was coerced to "Miami FL".
+        -   Since there are two universities named "Miami", if a user inputs 
+        "Miami" it automatically will switch the input to "Miami FL" due to the 
+        fact that Miami Ohio is not included in the dataset. The user will 
+        receive a warning letting them know that "Miami" was coerced to 
+        "Miami FL".
 
     -   Checks if the input is apart of the 3 letter all caps cases
 
-    -   After checking these cases, general capitalization rules will apply, capitalizing the first letter in each word
+    -   After checking these cases, general capitalization rules will apply, 
+    capitalizing the first letter in each word
 
-    -   The function also allows for the user to input "St." as "state" or "st" to allow some error from the user.
-
--   **Parameters**:
-
-    -   `team`: A character string representing the team name as inputted by the user.
-
--   **Returns**:
-
-    -   A character string with the properly formatted team name to match the dataset's expected format.
+    -   The function also allows for the user to input "St." as "state" or "st" 
+    to allow some error from the user.
 
 -   **Example**:
 
@@ -121,16 +171,18 @@ print(formatted_team) # Outputs "Saint Joseph's"
 
 #### `team_select(team, year)`
 
-This function creates a custom S3 object for a specific team and year, effectively sub-setting the main data set to focus on data relevant to the specified parameters. The function takes a team name and a year as inputs and returns a subset of data as a custom S3 object of class 'teamdata'.
-
--   **Parameters**:
-
-    -   `team`: A character string representing the team name.
-    -   `year`: An integer representing the year.
-
--   **Returns**:
-
-    -   A custom S3 object of class 'teamdata' containing the subsetted data.
+The team_select and matchup_select functions are the backbone of the package. 
+Team_select is the user's way to access the KenPom dataset, and convert it to an
+output that can be used by the other functions in the package. To use the 
+team_select function, the user passes a team name and a year to the function. 
+The function searches through a "cleaned" version of the dataset and returns a 
+data frame containing 45-50 relevant statistics describing that iteration of the 
+team. These dataframes are then converted into descriptive tables by 
+subsequent functions in the package. The subsetted data frames are returned as 
+custom S3 objects of class 'teamdata'. While these data frames may be of 
+interest to package users who are familiar with all the statistics we found to 
+be relevant to our other functions, the 'teamdata' objects are primarily useful 
+to other functions in the package, which we will discuss later on. 
 
 -   **Example**:
 
@@ -143,16 +195,17 @@ print(selected_team)
 
 #### `matchup_select(team1, year1, team2, year2)`
 
-This function facilitates the creation of a custom S3 object representing the data for two specific teams and their respective years, designed for matchup analysis. It processes inputs for two teams and their corresponding years, and returns a detailed comparison setup in a structured format.
-
--   **Parameters**:
-
-    -   `team1`: A character string representing the name of the first team.
-    -   `year1`: An integer representing the competition year of the first team.
-    -   `team2`: A character string representing the name of the second team.
-    -   `year2`: An integer representing the competition year of the second team.
-
--   **Returns**: A custom S3 object of class 'teamdata_matchup' which contains a list of the subsetted data for each team and year.
+The matchup_select function is very similar to the team_select function, with a 
+few key differences. This function takes two teams as inputs, and returns a 
+data frame that contains the team stats for both teams. While the team_select 
+function is used to make tables for individual teams, the matchup_select 
+function is used to make comparisons between two teams. These data frames are 
+returned as S3 objects of class "teamdata_matchup". These frames are useful
+to users because they format the data to be called by other functions. Other 
+functions use these "teamdata_matchup" objects to calculate which team is most 
+likely to win in a matchup, as well as side-by-side comparisons of stats that 
+are crucial to team success. These functions will be explained in the following 
+sections.
 
 -   **Example**:
 
@@ -167,13 +220,17 @@ print(selected_matchup)
 
 #### `team_table(selected_team)`
 
-This function creates a simple table showing basic information about the team. This includes team name, year, conference, seed, the round they made it to, wins and losses.
-
--   **Parameters**:
-
-    -   `selected_team`: A custom S3 object of class 'teamdata' containing subsetted data for the specified team.
-
--   **Returns**: A data table with team name, year, conference, seed, round, wins and losses for the specified team.
+This is the first of our table functions, and helps users understand basic but 
+useful information about March Madness teams. These tables are particularly 
+useful for users who are new to college basketball. For instance, if a user was 
+making a bracket, or even watching a college basketball game, and was unfamiliar 
+with UNC, they could use the team_table function to learn about it. They could 
+call `team_table(team_select("UNC", 2024))`, and be presented with a table
+explaining the team's conference, seed, wins and losses. The table also includes
+the round they made it to that year (assuming that year's tournament has already 
+been played). This information helps the user to understand very quickly how 
+successful a team has been, and will help them make decisions on how far they 
+think the team will go in current or future tournaments.
 
 -   **Example**:
 
@@ -185,13 +242,18 @@ team_table(team_select("Baylor", 2024))
 
 #### `stat_table(selected_team)`
 
-This function creates a simple table showing important success indicators for a team. These include efficiency field goals, free throw rate, offensive rebounds, and turnover rate.
-
--   **Parameters**:
-
-    -   `selected_team`: A custom S3 object of class 'teamdata' containing subsetted data for the specified team.
-
--   **Returns**: A data table with the statistics specified in the description.
+This is the second of the package's table functions, and is useful for 
+understanding more in-depth information on a given basketball team. The tables 
+returned by the function include percentages for four key statistics: 
+efficiency field goals, free throw rate, offensive rebounds, and turnover rates. 
+These stats act as key indicators for how well a team is playing. If a team is 
+has high percentages in these categories, even if they are seeded lower, they 
+may have a good chance of upsetting higher ranked teams. This function is useful 
+for users who are faced with close matchups in their brackets, and want help to 
+decide if they should call an upset or not. It also can be used to familiarize 
+themselves with why teams are seeded where they are, outside of just wins and 
+losses.The example below illustrates how the function is called in tandem with 
+the team_select function. 
 
 -   **Example**:
 
@@ -203,13 +265,15 @@ stat_table(team_select("Baylor", 2024))
 
 #### `matchup_chart(teamdata_matchup)`
 
-This function takes two teams and compares four important statistics (Efficiency Field Goals, Free Throw Rate, Offensive Rebounds, and Turnover Rate) to give insights on which team is better. The output of the function is a bar chart showing side by side percentages for each team's metrics.
-
--   **Parameters**:
-
-    \-`teamdata_matchup`: A custom S3 object of class 'teamdata_matchup' which contains a list of the subsetted data for each team and year.
-
--   **Returns**: A side-by-side bar chart showing a comparison of the four important statistics described above.
+The matchup_chart function helps users visualize team matchups. The chart takes 
+a "teamdata_matchup" object and returns a side-by-side bar chart comparing the 
+four key indicator statistics returned by the stat_table function. After using 
+the team_table and stat_table functions for multiple teams, a user can use the 
+matchup_chart function to see a comparison of teams they have familiarized 
+themselves with. This information helps the users make a decision on who to pick
+as a winner for close matchups. They can also use this function to compare the 
+same team over two different years to understand if the program is getting 
+better or worse.
 
 -   **Example**:
 
@@ -221,17 +285,16 @@ matchup_table(matchup_select("Baylor", 2024, "Purdue", 2024))
 
 #### `matchup_prob(teamdata_matchup)`
 
-Gives two selected teams a "power" rating based on their statistics and uses this and a normal distribution to simulate the probability of each team winning.
-
--   **Parameters**:
-
-    -   `teamdata_matchup`
-
--   **Returns**:
-
-    -   Power Index's for teams 1 and 2
-    -   Probability of winning for teams 1 and 2
-    -   Final prediction based off of weighted coinflip
+This probability function gives the most accessible and useful matchup analysis 
+for users. It takes a "teamdata_matchup" object, and uses its contained values 
+to calculate a "power" rating and return a winning probability for each team. 
+Once a user has familiarized themselves with two teams using the table and chart 
+functions, they can call the matchup_prob function to get number value that 
+shows how likely each team is to win a matchup. A user could use this function 
+for each matchup in their bracket to pick a winner, making bracket building less
+stressful. This function can also give users peace of mind knowing their picks 
+are backed by observed sports statistics. While this function isn't a perfect 
+predictor, it will give users a good shot at winning bracket challenges. 
 
 -   **Example**:
 
@@ -239,3 +302,22 @@ Gives two selected teams a "power" rating based on their statistics and uses thi
 teamdata_matchup <- matchup_select("Purdue", 2024, "Utah St.", 2024)
 matchup_prob(teamdata_matchup)
 ```
+
+# Conclusion
+
+The march.madness package described above provides user-friendly analytical 
+tools for basketball fans of all levels to design brackets and make March 
+Madness predictions. For a user who is a social basketball viewer, the table and 
+chart functions will help them familiarize themselves with relevant college 
+basketball teams. The information returned from these functions will not only 
+help people build informed brackets, but can help people participate in everyday 
+conversations about college basketball. The probability function can help people 
+make fast judgements on who is going to win a matchup, especially when the 
+seeds are close. Additionally, the stat_table and matchup_chart functions can 
+help explain why some teams are on unexpected winning streaks based on key 
+statistics from the KenPom dataset. All of these functions can also be used to 
+compare the same team year-to-year, which sets this package apart from other 
+predictive tools. This functionality can show how a team is progressing, and 
+even help predict how good a team will be in future years. And while this 
+package may not win you millions of dollars, it might just win you clout in your 
+family bracket challenge. 

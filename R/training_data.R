@@ -6,22 +6,27 @@ example_results <- read.csv("data/2021-Results.csv")
 dataset_2021 <- subset(dataset, YEAR == 2021)
 
 # Merge the tournament results with team information for Team1 and Team2
-matchup_stats <- merge(example_results, dataset_2021, by.x = "Team1", by.y = "TEAM", suffixes = c("", ".winner"))
-matchup_stats <- merge(matchup_stats, dataset_2021, by.x = "Team2", by.y = "TEAM", suffixes = c("", ".loser"))
+matchup_stats <- merge(example_results, dataset_2021, by.x = "Team1",
+                       by.y = "TEAM", suffixes = c("", ".winner"))
+matchup_stats <- merge(matchup_stats, dataset_2021, by.x = "Team2",
+                       by.y = "TEAM", suffixes = c("", ".loser"))
 
 # Remove useless columns
-matchup_stats <- subset(matchup_stats, select = -c(Year, YEAR, YEAR.loser, Round, ROUND, ROUND.loser))
+matchup_stats <- subset(matchup_stats, select = -c(Year, YEAR, YEAR.loser,
+                                                   Round, ROUND, ROUND.loser))
 
 # Found the stats of winners and losers of each matchup
 numeric_columns <- sapply(matchup_stats, is.numeric)
 matchup_stats <- matchup_stats[, numeric_columns]
-stats_columns <- colnames(matchup_stats)[grep("\\.loser", colnames(matchup_stats))]
+stats_columns <- colnames(matchup_stats)[grep("\\.loser",
+                                              colnames(matchup_stats))]
 
 # Found the difference between the stats of winners and losers
 for (stat in stats_columns) {
   stat_name <- gsub("\\.loser", "", stat)
   diff_column <- paste0(stat_name, "_diff")
-  matchup_stats[[diff_column]] <- matchup_stats[[stat_name]] - matchup_stats[[stat]]
+  matchup_stats[[diff_column]] <- matchup_stats[[stat_name]] -
+    matchup_stats[[stat]]
 }
 
 stat_diff <- matchup_stats[, grep("_diff", colnames(matchup_stats))]
@@ -43,5 +48,5 @@ result <- data.frame(
   Count_Greater_Than_0 = counts_greater_than_0
 )
 
-# From there is where we found the coefficients, which correspond to the "weight"
-# of each stat in the probability of winning
+# From there is where we found the coefficients, which correspond to the
+# "weight" of each stat in the probability of winning.

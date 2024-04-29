@@ -34,9 +34,11 @@ format_team_name <- function(team) {
       return("UC Davis")
     } else if (words[1] == "uc" && words[2] == "irvine") {
       return("UC Irvine")
-    } else if (words[1] == "uc" && words[2] == "santa" && words[3] == "barbara") {
+    } else if (words[1] == "uc" && words[2] == "santa" &&
+               words[3] == "barbara") {
       return("UC Santa Barbara")
-    } else if (words[1] == "miami" && (words[2] == "fl" || words[2] == "florida")) {
+    } else if (words[1] == "miami" &&
+               (words[2] == "fl" || words[2] == "florida")) {
       return("Miami FL")
     }
   }
@@ -44,7 +46,9 @@ format_team_name <- function(team) {
   # Handle 'Saint' Schools
   # First, handle specific cases involving 'Saint', 'St', or 'St.'
   if (length(words) >= 2) {
-    if (words[1] == "mount" && (words[2] == "saint" || words[2] == "st" || words[2] == "st.") && (words[3] == "marys" || words[3] == "mary's")) {
+    if (words[1] == "mount" &&
+        (words[2] == "saint" || words[2] == "st" || words[2] == "st.") &&
+        (words[3] == "marys" || words[3] == "mary's")) {
       return("Mount St. Mary's")
     } else if (words[1] == "saint" || words[1] == "st" || words[1] == "st.") {
       if (words[2] == "joseph's" || words[2] == "josephs") {
@@ -61,11 +65,14 @@ format_team_name <- function(team) {
 
   # Handle Specific A&M and A&T Schools
   if (length(words) >= 2) {
-    if (length(words) >= 3 && words[1] == "north" && words[2] == "carolina" && words[3] == "a&t") {
+    if (length(words) >= 3 && words[1] == "north" && words[2] == "carolina" &&
+        words[3] == "a&t") {
       return("North Carolina A&T")
-    } else if (words[1] == "praire" && words[2] == "view" && words[3] == "a&m") {
+    } else if (words[1] == "praire" && words[2] == "view" && words[3] == "a&m")
+      {
       return("Praire View A&M")
-      } else if (length(words) >= 4 && words[1] == "texas" && words[2] == "a&m" && words[3] == "corpus" && words[4] == "christi") {
+      } else if (length(words) >= 4 && words[1] == "texas" && words[2] == "a&m"
+                 && words[3] == "corpus" && words[4] == "christi") {
       return("Texas A&M Corpus Christi")
       } else if (words[1] == "texas" && words[2] == "a&m") {
       return("Texas A&M")
@@ -93,7 +100,8 @@ format_team_name <- function(team) {
 
   # Handle the Miami case
   if (length(words) == 1 && words[1] == "miami") {
-    warning("Note: 'Miami Ohio' is not included in the dataset. Referring to 'Miami FL'.")
+    warning("Note: 'Miami Ohio' is not included in the dataset. Referring to
+            'Miami FL'.")
     return("Miami FL")
   }
 

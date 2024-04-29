@@ -13,20 +13,28 @@
 #'
 #' @param mean_diff The mean of the normal distribution. Default is 57.049.
 #'
-#' @param sd_diff The standard deviation of the normal distribution. Default is 103.68.
+#' @param sd_diff The standard deviation of the normal distribution. Default is
+#' 103.68.
 #'
 #' @return The "power" index of each team as well as the probability of each
 #' team winning. Also a weighted coin flip if you want to select a winner from
 #' the probabilities.
 #'
 #' @export
-matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049, sd_diff = 103.68) {
+matchup_prob <- function(teamdata_matchup, n_sim = 10000, mean_diff = 57.049,
+                         sd_diff = 103.68) {
   # Coefficients found from training_data.R
-  coefficients <- c(0.716, 0.466, 0.7, 6.616, 0.716, 0.716, 0.583, 0, 0.533, 0.55, 0.566, 0.583, 0.516, 0.483, 0.483, 0.516, 0.566, 0.566, 0.433, 0.433, 0.583, 0.466, 0.566, 0.483, 0.566, 0.466, 0.516, 0.416, 0.483, 0.45, 0.583, 0.4, 0.366, 0.633, 0.483, 0.533, 0.516, 0.4, 0.683, 0.55, 0.45, 0.65, 0.533)
+  coefficients <- c(0.716, 0.466, 0.7, 6.616, 0.716, 0.716, 0.583, 0, 0.533,
+                    0.55, 0.566, 0.583, 0.516, 0.483, 0.483, 0.516, 0.566,
+                    0.566, 0.433, 0.433, 0.583, 0.466, 0.566, 0.483, 0.566,
+                    0.466, 0.516, 0.416, 0.483, 0.45, 0.583, 0.4, 0.366, 0.633,
+                    0.483, 0.533, 0.516, 0.4, 0.683, 0.55, 0.45, 0.65, 0.533)
 
   # Calculate the power index for each team
-  power1 <- colSums(teamdata_matchup$list_data$team1_year1[, -c(1:5)] * coefficients)
-  power2 <- colSums(teamdata_matchup$list_data$team2_year2[, -c(1:5)] * coefficients)
+  power1 <- colSums(teamdata_matchup$list_data$team1_year1[, -c(1:5)] *
+                      coefficients)
+  power2 <- colSums(teamdata_matchup$list_data$team2_year2[, -c(1:5)] *
+                      coefficients)
 
   power1 <- sum(power1)
   power2 <- sum(power2)

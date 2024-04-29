@@ -37,7 +37,8 @@ matchup_select <- function(team1, year1, team2, year2) {
     # Check if the selected year is available for the team
     available_years <- unique(dataset$YEAR[dataset$TEAM == formatted_team])
     if (!year %in% available_years) {
-      cat(sprintf("The selected year %s is not available for %s.\n", year, formatted_team))
+      cat(sprintf("The selected year %s is not available for %s.\n", year,
+                  formatted_team))
       cat("Please select an available year or choose 'Exit' to cancel:\n")
       available_years <- c(available_years, "Exit")
       choice <- menu(available_years, title = "Available Years")
@@ -61,10 +62,13 @@ matchup_select <- function(team1, year1, team2, year2) {
   if (is.null(result2)) return(NULL)  # Exit if user chose to cancel
 
   # Subset data for each team and year
-  subset_data1 <- dataset[dataset$TEAM == result1$team & dataset$YEAR == result1$year, ]
-  subset_data2 <- dataset[dataset$TEAM == result2$team & dataset$YEAR == result2$year, ]
+  subset_data1 <- dataset[dataset$TEAM == result1$team &
+                            dataset$YEAR == result1$year, ]
+  subset_data2 <- dataset[dataset$TEAM == result2$team &
+                            dataset$YEAR == result2$year, ]
 
   # Return a custom S3 object with the data
-  return(new_teamdata_matchup(list(team1_year1 = subset_data1, team2_year2 = subset_data2)))
+  return(new_teamdata_matchup(list(team1_year1 = subset_data1,
+                                   team2_year2 = subset_data2)))
 }
 

@@ -27,7 +27,9 @@ team_select <- function(team, year) {
 
   # Check if the formatted team name exists in the dataset
   if (!formatted_team %in% as.character(dataset$TEAM)) {
-    stop("Error: Team name not found. Please check spelling. Note: Package will only correct capitalization erros and will automatically abbreviate state to St.")
+    stop("Error: Team name not found. Please check spelling.
+         Note: Package will only correct capitalization erros and will
+         automatically abbreviate state to St.")
   }
 
   # Check if the selected year is available for the team
