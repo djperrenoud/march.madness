@@ -16,7 +16,7 @@ format_team_name <- function(team) {
   # Normalize space and convert to lowercase to handle case variations
   team <- trimws(team) # Remove any leading/trailing white space
   words <- strsplit(team, " ")[[1]]
-  words <- tolower(words)  # Lowercase all to handle variations
+  words <- tolower(words) # Lowercase all to handle variations
 
   # Handle specific cases
   if (length(words) >= 2) {
@@ -35,10 +35,10 @@ format_team_name <- function(team) {
     } else if (words[1] == "uc" && words[2] == "irvine") {
       return("UC Irvine")
     } else if (words[1] == "uc" && words[2] == "santa" &&
-               words[3] == "barbara") {
+                 words[3] == "barbara") {
       return("UC Santa Barbara")
     } else if (words[1] == "miami" &&
-               (words[2] == "fl" || words[2] == "florida")) {
+                 (words[2] == "fl" || words[2] == "florida")) {
       return("Miami FL")
     }
   }
@@ -47,8 +47,8 @@ format_team_name <- function(team) {
   # First, handle specific cases involving 'Saint', 'St', or 'St.'
   if (length(words) >= 2) {
     if (words[1] == "mount" &&
-        (words[2] == "saint" || words[2] == "st" || words[2] == "st.") &&
-        (words[3] == "marys" || words[3] == "mary's")) {
+          (words[2] == "saint" || words[2] == "st" || words[2] == "st.") &&
+          (words[3] == "marys" || words[3] == "mary's")) {
       return("Mount St. Mary's")
     } else if (words[1] == "saint" || words[1] == "st" || words[1] == "st.") {
       if (words[2] == "joseph's" || words[2] == "josephs") {
@@ -66,23 +66,24 @@ format_team_name <- function(team) {
   # Handle Specific A&M and A&T Schools
   if (length(words) >= 2) {
     if (length(words) >= 3 && words[1] == "north" && words[2] == "carolina" &&
-        words[3] == "a&t") {
+          words[3] == "a&t") {
       return("North Carolina A&T")
-    } else if (words[1] == "praire" && words[2] == "view" && words[3] == "a&m")
-      {
+    } else if (words[1] == "praire" &&
+                 words[2] == "view" && words[3] == "a&m") {
       return("Praire View A&M")
-      } else if (length(words) >= 4 && words[1] == "texas" && words[2] == "a&m"
-                 && words[3] == "corpus" && words[4] == "christi") {
+    } else if (length(words) >= 4 && words[1] == "texas" &&
+                 words[2] == "a&m" &&
+                 words[3] == "corpus" && words[4] == "christi") {
       return("Texas A&M Corpus Christi")
-      } else if (words[1] == "texas" && words[2] == "a&m") {
+    } else if (words[1] == "texas" && words[2] == "a&m") {
       return("Texas A&M")
-      }
     }
+  }
 
 
   # Handle Specific Four Letter Abbreviations
-  if (nchar(words[1]) == 4 && length(words) == 1){
-    if (words[1] == "unlv"){
+  if (nchar(words[1]) == 4 && length(words) == 1) {
+    if (words[1] == "unlv") {
       return("UNLV")
     } else if (words[1] == "utep") {
       return("UTEP")
@@ -107,11 +108,13 @@ format_team_name <- function(team) {
 
   # Apply general capitalization rules
   words <- ifelse(words == "of", "of",
-                  ifelse(words == "state", "St.",
-                         ifelse(nchar(words) >= 3,
-                                sub("^(.)", "\\U\\1", words, perl = TRUE),
-                                sub("st$", "St.", words))))
+    ifelse(words == "state", "St.",
+      ifelse(nchar(words) >= 3,
+        sub("^(.)", "\\U\\1", words, perl = TRUE),
+        sub("st$", "St.", words)
+      )
+    )
+  )
 
   return(paste(words, collapse = " "))
-
 }

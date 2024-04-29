@@ -7,7 +7,8 @@
 matchup_chart(teamdata_matchup)
 }
 \arguments{
-\item{teamdata_matchup}{A list of two dataframes, each containing the statistics for that team and year}
+\item{teamdata_matchup}{A list of two dataframes, each containing the
+statistics for that team and year}
 }
 \value{
 The bar chart described above.

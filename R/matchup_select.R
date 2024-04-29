@@ -17,9 +17,8 @@
 #'
 #' @export
 matchup_select <- function(team1, year1, team2, year2) {
-  # Load the dataset
-  dataset <- read.csv("data/initial_clean.csv")
 
+  data("dataset", package = "march.madness", envir = environment())
   # Process each team and year using a nested function
   process_team_year <- function(team, year) {
     formatted_team <- format_team_name(team)
@@ -71,4 +70,3 @@ matchup_select <- function(team1, year1, team2, year2) {
   return(new_teamdata_matchup(list(team1_year1 = subset_data1,
                                    team2_year2 = subset_data2)))
 }
-

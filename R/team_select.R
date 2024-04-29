@@ -3,20 +3,18 @@
 #' Creates a custom S3 object representing a subset of data
 #' for a specific team and year.
 #'
-#' @importFrom "utils" "read.csv" "menu"
+#' @importFrom "utils" "read.csv" "menu" "data"
 #'
 #' @param team A character string representing the team name.
 #'
 #' @param year An integer representing the year.
-
-#' @return A custom S3 object of class 'teamdata' containing the subsetted data.
 #'
+#' @return A custom S3 object of class 'teamdata' containing the subsetted data.
 #'
 #' @export
 team_select <- function(team, year) {
-  # Load the dataset
-  dataset <- read.csv("data/initial_clean.csv")
 
+  data("dataset", package = "march.madness", envir = environment())
   # Format the team name input
   formatted_team <- format_team_name(team)
 
@@ -51,8 +49,8 @@ team_select <- function(team, year) {
   }
 
   # Subset the dataset based on the provided team and year
-  subset_data <- dataset[as.character(dataset$TEAM) ==
-    formatted_team & dataset$YEAR == year, ]
+  subset_data <- dataset[as.character(dataset$TEAM) == formatted_team &
+                           dataset$YEAR == year, ]
 
   # Return the subsetted data
   return(new_teamdata(subset_data))

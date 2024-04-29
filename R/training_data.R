@@ -1,8 +1,8 @@
 # Training data to find which stats are important for probability of winning
 # Used the 2021 tournament results
 # This is specifically for matchup_function.R
-dataset <- read.csv("data/initial_clean.csv")
-example_results <- read.csv("data/2021-Results.csv")
+data("dataset", package = "march.madness", envir = environment())
+data("example_results", package = "march.madness", envir = environment())
 dataset_2021 <- subset(dataset, YEAR == 2021)
 
 # Merge the tournament results with team information for Team1 and Team2

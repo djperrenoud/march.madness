@@ -23,7 +23,8 @@ containing the subsetted data of two teams in the selected years.}
 
 \item{mean_diff}{The mean of the normal distribution. Default is 57.049.}
 
-\item{sd_diff}{The standard deviation of the normal distribution. Default is 103.68.}
+\item{sd_diff}{The standard deviation of the normal distribution. Default is
+103.68.}
 }
 \value{
 The "power" index of each team as well as the probability of each
