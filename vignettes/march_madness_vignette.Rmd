@@ -2,11 +2,11 @@
 title: "March Madness Project Vignette"
 author: "AJ Haygood, Dylan Perrenoud, Jonah Feigleson"
 date: "`r Sys.Date()`"
-output: pdf_document
-vignette: >
-  %\VignetteIndexEntry{March Madness Project Vignette}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output:
+  html_document:
+    df_print: paged
+vignette: "%\\VignetteIndexEntry{March Madness Project Vignette} %\\VignetteEngine{knitr::rmarkdown}
+  %\\VignetteEncoding{UTF-8}\n"
 ---
 
 ```{r setup, include = FALSE}
@@ -58,8 +58,11 @@ user-friendly comparisons of college basketball teams.
 
 You can install the released version of `march.madness` with:
 
-``` r
-install.packages("march.madness")
+```{r, eval=FALSE}
+remotes::install_github("djperrenoud/march.madness")
+```
+```{r, eval=TRUE}
+library(march.madness)
 ```
 
 # Data Cleaning
@@ -153,7 +156,7 @@ operates, refer to the details section below.
 
 -   **Example**:
 
-``` r
+``` {r, include = TRUE}
 # Example of handling a common abbreviation
 formatted_team <- format_team_name("utah st")
 print(formatted_team) # Outputs "Utah St."
@@ -186,7 +189,7 @@ to other functions in the package, which we will discuss later on.
 
 -   **Example**:
 
-``` r
+``` {r, include = TRUE}
 selected_team <- team_select("Baylor", 2024)
 print(selected_team)
 ```
@@ -209,7 +212,7 @@ sections.
 
 -   **Example**:
 
-``` r
+``` {r, include = TRUE}
 selected_matchup <- matchup_select("Baylor", 2023, "Purdue", 2023)
 print(selected_matchup)
 ```
@@ -234,7 +237,7 @@ think the team will go in current or future tournaments.
 
 -   **Example**:
 
-``` r
+``` {r, include = TRUE}
 team_table(team_select("Baylor", 2024))
 ```
 
@@ -257,7 +260,7 @@ the team_select function.
 
 -   **Example**:
 
-``` r
+``` {r, include = TRUE}
 stat_table(team_select("Baylor", 2024))
 ```
 
@@ -277,8 +280,8 @@ better or worse.
 
 -   **Example**:
 
-``` r
-matchup_table(matchup_select("Baylor", 2024, "Purdue", 2024))
+``` {r, include = TRUE}
+matchup_chart(matchup_select("Baylor", 2024, "Purdue", 2024))
 ```
 
 ## Match up Function
@@ -298,7 +301,7 @@ predictor, it will give users a good shot at winning bracket challenges.
 
 -   **Example**:
 
-``` r
+``` {r, include = TRUE}
 teamdata_matchup <- matchup_select("Purdue", 2024, "Utah St.", 2024)
 matchup_prob(teamdata_matchup)
 ```
