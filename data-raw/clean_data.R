@@ -9,13 +9,14 @@
 #' include all of the stats we had available and just git rid of our
 #' unnecessary rank columns.
 
-usethis::use_data(DATASET, overwrite = TRUE)
+# Import CSV as dataframe
+raw_data <- read.csv("data-raw/dataset2025.csv", stringsAsFactors = FALSE)
 
-#Import csv as dataframe.
-raw_data <- read.csv("data-raw/dataset2025.csv")
+# Subset data to only include numeric statistics (excluding rank columns)
+dataset <- raw_data[, c(1, 2, 8, 9, 10, 13, 17, 21, 25, 26, 27, 29:64)]
 
-#Subset data to only include columns holding stats of interest to our analysis.
-clean_data <- raw_data[, c(1, 2, 8, 9, 10, 13, 17, 21, 25, 26, 27, 29:64)]
+# Export the cleaned data as a new CSV file
+write.csv(dataset, file = "initial_clean.csv", row.names = FALSE)
 
-#Export the dataframe as a new csv file.
-write.csv(clean_data, file = "initial_clean.csv", row.names = FALSE)
+# Save the cleaned dataset in the package
+usethis::use_data(dataset, overwrite = TRUE)
